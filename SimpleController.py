@@ -23,94 +23,94 @@ from SimpleSounds import SimpleSounds
 
 root = Tk()
 root.wm_title("Simple NAO Controller v1.1")
-root.configure(background='white')
-frame = Frame(root, frameWidth, frameHeight)
+root.configure(background="white")
+frame = Frame(root, width=Config.FRAMEWIDTH, height=Config.FRAMEHEIGHT)
 motionObj = SimpleMotions()
 visionObj = SimpleVisions()
 soundObj = SimpleSounds()
 
-class SimpleControllerBeta:
+class SimpleController:
     def __init__(self):
         frame.pack_propagate(0)
-        self.createbuttons() 
+        self.createButtons() 
         frame.pack()
-        root.mainloop
+        root.mainloop()
         pass
 
     def createButtons(self):
         standUpButton = Button( frame, 
-                                text = "Stand Up", 
-                                background = "green",
-                                foreground = "black",
-                                command = lambda : self.wrapper(motionObj.fastStand()))
+                text = "Stand Up", 
+                background = "green",
+                foreground = "black",
+                command = lambda : self.wrapper(motionObj.fastStand()))
         standUpButton.pack()
 
         moveXYButton = Button(  frame, 
-                                text = "Walk X/Y cm", 
-                                background = "green", 
-                                foreground = "black", 
-                                command = lambda : self.wrapper(motionObj.moveXYCm(self.moveX.get(), self.moveY.get())))
+                text = "Walk X/Y cm", 
+                background = "green", 
+                foreground = "black", 
+                command = lambda : self.wrapper(motionObj.moveXYCm(self.moveX.get(), self.moveY.get())))
         moveXYButton.pack()
 
         self.makeXEntry()
         self.makeYEntry()
 
         rotateButton = Button(  frame, 
-                                text = "Rotate in Degrees", 
-                                background = "green", 
-                                foreground = "black", 
-                                command = lambda : self.wrapper(motionObj.rotateTheta(self.moveTh.get())))
+                text = "Rotate in Degrees", 
+                background = "green", 
+                foreground = "black", 
+                command = lambda : self.wrapper(motionObj.rotateTheta(self.moveTh.get())))
         rotateButton.pack()
 
         self.makeRotationThetaEntry()
 
         stopButton = Button(    frame, 
-                                text = "STOP!", 
-                                background = "red", 
-                                foreground = "white", 
-                                command = lambda : self.wrapper(motionObj.stop()))
+                text = "STOP!", 
+                background = "red", 
+                foreground = "white", 
+                command = lambda : self.wrapper(motionObj.stop()))
         stopButton.pack()
 
         takePictureButton = Button( frame, 
-                                    text = "Take a Picture", 
-                                    background = "blue", 
-                                    foreground = "black", 
-                                    command = lambda : self.wrapper(visionObj.takePicture(self.name.get())))
+                text = "Take a Picture", 
+                background = "blue", 
+                foreground = "black", 
+                command = lambda : self.wrapper(visionObj.takePicture(self.name.get())))
         takePictureButton.pack()
 
         self.makePictureNameEntry()
 
         speakButton = Button(   frame, 
-                                text = "Speak", 
-                                background = "blue", 
-                                foreground = "black", 
-                                command = lambda : self.wrapper(soundObj.speak(self.message.get())))
+                text = "Speak", 
+                background = "blue", 
+                foreground = "black", 
+                command = lambda : self.wrapper(soundObj.speak(self.message.get())))
         speakButton.pack()
 
         self.makeMessageEntry()
 
         moveHeadPitchButton = Button(   frame, 
-                                        text = "Move Head Pitch", 
-                                        background = "green",
-                                        foreground = "black", 
-                                        command = lambda : self.wrapper(motionObj.moveHeadPitch(self.headPitchTheta.get(), self.headPitchSpeed.get())))
+                text = "Move Head Pitch", 
+                background = "green",
+                foreground = "black", 
+                command = lambda : self.wrapper(motionObj.moveHeadPitch(self.headPitchTheta.get(), self.headPitchSpeed.get())))
         moveHeadPitchButton.pack()
 
         self.makeHeadPitchThetaEntry()
         self.makeHeadPitchSpeedEntry()
 
         chillOutButton = Button(    frame,
-                                    text = "Chill Out", 
-                                    background = "pink",
-                                    foreground = "black", 
-                                    command = lambda : self.wrapper(motionObj.chillOut()))
+                text = "Chill Out", 
+                background = "pink",
+                foreground = "black", 
+                command = lambda : self.wrapper(motionObj.chillOut()))
         chillOutButton.pack()
 
         kickButton = Button(    frame,
-                                text = "Kick",
-                                background = "green",
-                                foreground = "black",
-                                command = lambda : self.wrapper(motionObj.simpleKick()))
+                text = "Kick Right",
+                background = "green",
+                foreground = "black",
+                command = lambda : self.wrapper(motionObj.sideLeftKick()))
         kickButton.pack()
 
     def makeXEntry(self):
@@ -138,33 +138,34 @@ class SimpleControllerBeta:
         self.name = Entry(frame)
         self.name.pack()
         self.name.delete(0, END)
-        self.name.insert(0, ".jpg")
+        self.name.insert(0, ".png")
         pass
 
     def makeMessageEntry(self):
-        self.chirp = Entry(frame)
-        self.chirp.pack()
-        self.chirp.delete(0, END)
-        self.chirp.insert(0, "Hello! I am a NAO")
+        self.message = Entry(frame)
+        self.message.pack()
+        self.message.delete(0, END)
+        self.message.insert(0, "Hello! I am a NAO")
         pass
 
     def wrapper(self, func):
         func
-        self.update()
+        root.update()
+        #self.update()
         pass
 
     def makeHeadPitchThetaEntry(self):
-            self.headPitchTheta = Entry(frame)
-            self.headPitchTheta.pack()
-            self.headPitchTheta.delete(0, END)
-            self.headPitchTheta.insert(0, "0.3")
-            pass
+        self.headPitchTheta = Entry(frame)
+        self.headPitchTheta.pack()
+        self.headPitchTheta.delete(0, END)
+        self.headPitchTheta.insert(0, "0.3")
+        pass
 
     def makeHeadPitchSpeedEntry(self):
-            self.headPitchSpeed = Entry(frame)
-            self.headPitchSpeed.pack()
-            self.headPitchSpeed.delete(0, END)
-            self.headPitchSpeed.insert(0, "0.5")
-            pass
+        self.headPitchSpeed = Entry(frame)
+        self.headPitchSpeed.pack()
+        self.headPitchSpeed.delete(0, END)
+        self.headPitchSpeed.insert(0, "0.5")
+        pass
 
-NAOControl = NAOControl()
+SimpleController = SimpleController()

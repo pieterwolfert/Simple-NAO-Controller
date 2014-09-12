@@ -25,7 +25,7 @@ import sys
 
 class SimpleSounds:
     def __init__(self):
-        self.talkProxy = ALProxy("ALTextToSpeech", ROBOT_IP, PORT)
+        self.talkProxy = ALProxy("ALTextToSpeech", Config.ROBOT_IP, Config.PORT)
 
     def speak(self, word):
         self.talkProxy.say(word)

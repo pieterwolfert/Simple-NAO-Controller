@@ -32,8 +32,8 @@ motionObj = SimpleMotions()
 
 class SimpleVisions:
     def __init__(self):
-        self.visionProxy = ALProxy("ALVideoDevice", ROBOT_IP, PORT)
-        self.motionProxy = ALProxy("ALMotion", ROBOT_IP, PORT)
+        self.visionProxy = ALProxy("ALVideoDevice", Config.ROBOT_IP, Config.PORT)
+        self.motionProxy = ALProxy("ALMotion", Config.ROBOT_IP, Config.PORT)
 
         pass
 

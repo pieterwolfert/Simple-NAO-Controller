@@ -9,12 +9,14 @@
  The required software version is naoqi 2.1
 ======================================================================================================
 '''
+import math
+#import almath
 
 class Config:
 
     # Connection
-    ROBOT_IP =  "10.42.0.29" #David
-    #ROBOT_IP = "10.42.0.65" #Hal
+    #ROBOT_IP =  "10.42.0.29" #David
+    ROBOT_IP = "10.42.0.65" #Hal
     #ROBOT_IP = "10.42.0.53" #Daisy
     PORT = 9559
 
@@ -24,8 +26,8 @@ class Config:
     RAD2DEG = 180.0/math.pi # Convert Rad to Deg
 
     # Interface things
-    frameWidth = 100
-    frameHeight = 200
+    FRAMEWIDTH = 300
+    FRAMEHEIGHT = 500
 
     # Movement
     MAXSTEPSIZE = 8  # cm
